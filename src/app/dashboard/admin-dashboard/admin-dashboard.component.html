@@ -1,0 +1,19 @@
+<div class="dashboard-container">
+  <h2>Admin Dashboard</h2>
+  <div class="delivery-persons">
+    <h3>Delivery Personnel Overview</h3>
+    <table>
+      <tr>
+        <th>Name</th><th>Parcels</th><th>Completed</th><th>Pending</th><th>Message</th><th>Actions</th>
+      </tr>
+      <tr *ngFor="let person of deliveryPersons; let i = index">
+        <td>{{ person.name }}</td>
+        <td>{{ person.parcels }}</td>
+        <td class="completed">{{ person.completed }}</td>
+        <td class="pending">{{ person.pending }}</td>
+        <td class="message">{{ person.message || 'No Issues' }}</td>
+        <td><button (click)="allocateParcel(i)">Allocate Parcel</button></td>
+      </tr>
+    </table>
+  </div>
+</div>

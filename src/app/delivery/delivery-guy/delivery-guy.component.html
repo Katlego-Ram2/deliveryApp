@@ -1,0 +1,49 @@
+<div class="delivery-guy-container">
+    <div class="delivery-guy-box">
+      <h2>Delivery Scan & Update</h2>
+      <!-- Section for scanning or entering the parcel code -->
+      <div class="scan-section">
+        <label for="parcelCode">Scan / Enter Parcel Code</label>
+        <input type="text" id="parcelCode" placeholder="Parcel Code" [(ngModel)]="parcelCode" />
+        <button (click)="loadParcelDetails()">Load Parcel</button>
+      </div>
+  
+      <!-- Section to display parcel and customer details (once loaded) -->
+      <div class="parcel-details" *ngIf="parcelLoaded">
+        <h3>Parcel & Customer Details</h3>
+        <p><strong>Parcel Status:</strong> {{ parcelDetails.status }}</p>
+        <p>
+          <strong>Expected Arrival:</strong>
+          {{ parcelDetails.arrivalDate }} at {{ parcelDetails.arrivalTime }}
+        </p>
+        <p><strong>Customer Name:</strong> {{ parcelDetails.customerName }}</p>
+        <p><strong>Customer Address:</strong> {{ parcelDetails.customerAddress }}</p>
+        <p><strong>Contact:</strong> {{ parcelDetails.customerContact }}</p>
+      </div>
+  
+      <!-- Section for delivery guy to add details -->
+      <form class="update-section" *ngIf="parcelLoaded" (ngSubmit)="submitDeliveryUpdate()">
+        <h3>Update Delivery Details</h3>
+        <div class="input-group">
+          <label for="deliveryName">Your Name</label>
+          <input type="text" id="deliveryName" placeholder="Enter your name" [(ngModel)]="deliveryInfo.name" name="deliveryName" required />
+        </div>
+        <div class="input-group">
+          <label for="deliveryContact">Your Contact</label>
+          <input type="text" id="deliveryContact" placeholder="Enter your contact number" [(ngModel)]="deliveryInfo.contact" name="deliveryContact" required />
+        </div>
+        <div class="input-group">
+          <label for="message">Message to Customer</label>
+          <textarea id="message" placeholder="Enter a message for the customer" [(ngModel)]="deliveryInfo.message" name="message"></textarea>
+        </div>
+        <div class="input-group">
+          <label for="location">Your Location</label>
+          <input type="text" id="location" placeholder="Current Location" [(ngModel)]="deliveryInfo.location" name="location" />
+          <!-- Optionally, you can have a button to auto-detect location -->
+          <button type="button" (click)="getCurrentLocation()">Get Current Location</button>
+        </div>
+        <button type="submit" class="btn-update">Submit Update</button>
+      </form>
+    </div>
+  </div>
+  
