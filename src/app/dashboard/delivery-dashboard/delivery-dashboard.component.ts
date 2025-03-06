@@ -6,24 +6,48 @@ import { Component } from '@angular/core';
   styleUrl: './delivery-dashboard.component.scss'
 })
 export class DeliveryDashboardComponent {
-  deliveries = [
-    { id: 'ORD123', customer: 'John Doe', status: 'In Transit', eta: '15 min' },
-    { id: 'ORD124', customer: 'Jane Smith', status: 'Pending Pickup', eta: 'N/A' },
-    { id: 'ORD125', customer: 'David Lee', status: 'Delivered', eta: 'Completed' }
+  drivers = [
+    { id: 1, name: 'Driver A' },
+    { id: 2, name: 'Driver B' },
+    { id: 3, name: 'Driver C' },
+    { id: 4, name: 'Driver D' },
+    // More drivers...
   ];
 
-  notifications = [
-    'New delivery assigned: #ORD126',
-    'Traffic alert: Delays on Main St.',
-    'Customer John Doe updated delivery location.'
+  parcels = [
+    { id: 1, name: 'Parcel X', selectedDriver: null, comment: '' },
+    { id: 2, name: 'Parcel Y', selectedDriver: null, comment: '' },
+    { id: 3, name: 'Parcel Z', selectedDriver: null, comment: '' },
+    { id: 4, name: 'Parcel A', selectedDriver: null, comment: '' },
+    { id: 5, name: 'Parcel B', selectedDriver: null, comment: '' },
+    { id: 6, name: 'Parcel C', selectedDriver: null, comment: '' },
+    // More parcels...
   ];
 
-  earnings = 2450;
-  completedDeliveries = 52;
-  pendingDeliveries = 8;
-  totalOrders = 125;
-  processingOrders = 86;
-  deliveriesToday = 94;
-  arrivalsToday = 27;
+  itemsPerPage = 5;
+  currentPage = 1;
+  totalPages = Math.ceil(this.parcels.length / this.itemsPerPage);
+
+  get paginatedParcels() {
+    const start = (this.currentPage - 1) * this.itemsPerPage;
+    const end = start + this.itemsPerPage;
+    return this.parcels.slice(start, end);
+  }
+
+  changePage(direction: string) {
+    if (direction === 'next' && this.currentPage < this.totalPages) {
+      this.currentPage++;
+    } else if (direction === 'prev' && this.currentPage > 1) {
+      this.currentPage--;
+    }
+  }
+
+  allocateParcel(parcel: any) {
+    console.log(`Allocating ${parcel.name} to ${parcel.selectedDriver}`);
+  }
+
+  reallocateParcel(parcel: any) {
+    console.log(`Reallocating ${parcel.name} to ${parcel.selectedDriver}`);
+  }
 } 
 

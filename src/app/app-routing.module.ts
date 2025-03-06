@@ -19,7 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },          // Login page route
   { path: 'forgot-password', component: ForgotPasswordComponent }, 
   { path: 'delivery', component: CustomerDisplayComponent },
-  { path: 'delivery-guy', component: DeliveryGuyComponent } ,
+  { path: 'delivery-dashboard', component: DeliveryDashboardComponent } ,
   { path: 'admin-dashboard', component: AdminDashboardComponent },
 
 ];
